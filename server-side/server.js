@@ -27,7 +27,7 @@ app.use('/api/v1', widget);
 
 // Index route
 app.get('/', (req, res) => {
-  res.send({ message: 'hello wold!' });
+  res.send({ message: 'hello Soufiane' });
 });
 
 app.listen(port, () => {

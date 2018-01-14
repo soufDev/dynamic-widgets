@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { Grid, Message, Loader, Table, Button, Icon } from 'semantic-ui-react';
+import { withRouter } from 'react-router-dom';
 import * as widgetActions from '../../actions/widget';
 
 const defaultProps = {
@@ -22,7 +23,9 @@ const propTypes = {
 class Widget extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      open: false,
+    };
   }
 
   componentDidMount() {
@@ -41,15 +44,12 @@ class Widget extends Component {
   renderTableData() {
     const { widgets } = this.props;
     return widgets.map((w, i) => (
-      <Table.Row key={i}>
+      <Table.Row key={w.id}>
         <Table.Cell>{i + 1}</Table.Cell>
         <Table.Cell>{w.name}</Table.Cell>
         <Table.Cell>{w.type}</Table.Cell>
         <Table.Cell>
-          <Button
-            floated={'left'}
-            onClick={() => this.props.history.push(`widget/delete/${w._id}`)}
-          >
+          <Button floated={'left'} onClick={() => this.props.history.push(`widget/delete/${w.id}`)}>
             <Icon name={'delete'} />
             Delete
           </Button>
@@ -133,4 +133,4 @@ function mapStateToProps(state) {
 
 Widget.defaultProps = defaultProps;
 Widget.propTypes = propTypes;
-export default connect(mapStateToProps, mapDispatchToProps)(Widget);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Widget));

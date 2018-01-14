@@ -11,6 +11,9 @@ import {
   UPDATE_WIDGET_FAILURE,
   UPDATE_WIDGET_SUCCESS,
   UPDATE_WIDGET_REQUEST,
+  DELETE_WIDGET_REQUEST,
+  DELETE_WIDGET_FAILURE,
+  DELETE_WIDGET_SUCCESS,
 } from '../actions/widget';
 import updateObjectInArray from '../utils/imutable';
 
@@ -95,6 +98,24 @@ export default function widget(
         error: false,
         message: null,
         widgets: updateObjectInArray(state.widgets, action.widget),
+      });
+    case DELETE_WIDGET_REQUEST:
+      return Object.assign({}, state, {
+        isFetching: true,
+        error: false,
+        message: null,
+      });
+    case DELETE_WIDGET_FAILURE:
+      return Object.assign({}, state, {
+        isFetching: false,
+        error: true,
+        message: action.message,
+      });
+    case DELETE_WIDGET_SUCCESS:
+      return Object.assign({}, state, {
+        isFetching: false,
+        error: false,
+        message: null,
       });
     default:
       return state;

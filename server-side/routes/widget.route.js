@@ -18,7 +18,7 @@ router.post('/widget', (req, res) => {
 });
 
 router.delete('/widget', (req, res) => {
-  widgetController.delelteWidget(req, res);
+  widgetController.deleteWidget(req, res);
 });
 
 export default router;

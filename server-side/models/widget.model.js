@@ -1,6 +1,6 @@
-import mongoose from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
 
-const widgetSchema = mongoose.Schema({
+const widgetSchema = Schema({
   name: {
     type: String,
     required: true,
@@ -17,7 +17,13 @@ const widgetSchema = mongoose.Schema({
     type: Boolean,
   },
 });
-
+widgetSchema.set('toJSON', {
+  virtuals: true,
+  versionKey: false,
+  transform(doc, ret) {
+    delete ret._id;
+  },
+});
 const widgetModel = mongoose.model('Widget', widgetSchema);
 
 widgetModel.getAll = () => {
@@ -33,7 +39,7 @@ widgetModel.addWidget = (newWidget) => {
 };
 
 widgetModel.updateWidget = (widget) => {
-  return widgetModel.findByIdAndUpdate(widget._id, widget);
+  return widgetModel.findByIdAndUpdate(widget.id, widget);
 };
 
 widgetModel.removeWidget = (widgetId) => {

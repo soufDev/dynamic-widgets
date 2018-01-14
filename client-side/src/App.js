@@ -6,6 +6,7 @@ import Header from './component/header/Header';
 import Widgets from './component/Widgets/Widget';
 import Home from './component/Home/Home';
 import NewWidget from './component/Widgets/NewWidget';
+import PopUp from './component/Widgets/Delete';
 import configureStore from './store';
 
 class App extends Component {
@@ -24,6 +25,7 @@ class App extends Component {
               <Route exact path="/" component={Home} />
               <Route path="/widgets" component={Widgets} />
               <Route path="/widget/new" component={NewWidget} />
+              <Route path="/widget/delete/:id" component={PopUp} />
             </Container>
           </div>
         </Router>

@@ -154,3 +154,41 @@ export function updateWidget(widget) {
       });
   };
 }
+
+export const DELETE_WIDGET_REQUEST = 'DELETE_WIDGET_REQUEST';
+export const DELETE_WIDGET_SUCCESS = 'DELETE_WIDGET_SUCCESS';
+export const DELETE_WIDGET_FAILURE = 'DELETE_WIDGET_FAILURE';
+
+const deleteRequest = () => ({
+  type: DELETE_WIDGET_REQUEST,
+  isFetching: true,
+});
+
+const deleteSuccess = widget => ({
+  type: DELETE_WIDGET_SUCCESS,
+  isFetching: false,
+  widget,
+});
+
+const deleteFailure = message => ({
+  type: DELETE_WIDGET_FAILURE,
+  isFetching: false,
+  message,
+});
+
+export function deleteWidget(widget) {
+  return (dispatcher) => {
+    deleteRequest();
+    return axios({
+      url: `${WIDGET_PATH}/widget`,
+      method: 'DELETE',
+      responseType: 'json',
+      data: widget,
+    })
+      .then(response => dispatcher(deleteSuccess(response.data)))
+      .catch((error, reject) => {
+        dispatcher(deleteFailure(error));
+        reject(error);
+      });
+  };
+}

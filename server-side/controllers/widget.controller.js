@@ -44,7 +44,7 @@ controller.addWidget = async (req, res) => {
 
 controller.updateWidget = async (req, res) => {
   const newWidget = Widget({
-    _id: req.body._id,
+    _id: req.body.id,
     name: req.body.name,
     type: req.body.type,
     params: req.body.params,
@@ -61,9 +61,10 @@ controller.updateWidget = async (req, res) => {
 };
 
 controller.deleteWidget = async (req, res) => {
-  const widgetId = req.body._id;
+  console.log('delete id', req.body.id);
+  const widgetId = req.body.id;
   try {
-    const removedWidget = await Widget.removedWidget(widgetId);
+    const removedWidget = await Widget.removeWidget(widgetId);
     logger.info(`Deleted Widget-${removedWidget}`);
     res.send('Widget successfully Deleted');
   } catch (err) {
