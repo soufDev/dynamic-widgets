@@ -23,7 +23,7 @@ const propTypes = {
   message: PropTypes.string,
   history: PropTypes.shape({ push: PropTypes.func }).isRequired,
   isFetching: PropTypes.bool.isRequired,
-  match: PropTypes.shape({ params: PropTypes.object }),
+  match: PropTypes.shape({ params: PropTypes.object }).isRequired,
   error: PropTypes.bool,
 };
 
