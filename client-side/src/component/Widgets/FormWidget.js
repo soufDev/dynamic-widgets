@@ -91,6 +91,16 @@ const FormWidget = ({ onChange, onChangeParams, defaultValue, isFetching }) => (
         onChange={onChangeParams}
         paramValue={defaultValue.params}
       />
+      <Form.Field>
+        <label htmlFor="url">Generated URL</label>
+        <input
+          type="text"
+          disabled
+          name="url"
+          value={`/api/v1/${defaultValue.name}/${defaultValue.type}/${defaultValue.params}`}
+          onChange={onChange}
+        />
+      </Form.Field>
     </Form>
   </div>
 );

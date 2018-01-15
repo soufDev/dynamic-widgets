@@ -27,6 +27,7 @@ class NewWidget extends Component {
       name: 'organizations',
       type: 'Card',
       params: 'name',
+      url: '/api/v1/organizations/Card/name',
     };
     this.onChange = this.onChange.bind(this);
     this.onChangeParams = this.onChangeParams.bind(this);
@@ -58,6 +59,7 @@ class NewWidget extends Component {
       name: this.state.name,
       type: this.state.type,
       params: this.state.params.split(' '),
+      url: `/api/v1/${this.state.name}/${this.state.type}/${this.state.params}`,
     };
     this.props.actions
       .createWidget(widget)

@@ -3,26 +3,30 @@ import mongoose, { Schema } from 'mongoose';
 const widgetSchema = Schema({
   name: {
     type: String,
-    required: true,
+    required: true
   },
   type: {
     type: String,
-    required: true,
+    required: true
   },
   params: {
     type: Array,
-    required: false,
+    required: false
+  },
+  url: {
+    type: String,
+    required: true
   },
   activated: {
-    type: Boolean,
-  },
+    type: Boolean
+  }
 });
 widgetSchema.set('toJSON', {
   virtuals: true,
   versionKey: false,
   transform(doc, ret) {
     delete ret._id;
-  },
+  }
 });
 const widgetModel = mongoose.model('Widget', widgetSchema);
 
@@ -34,15 +38,15 @@ widgetModel.getAllActivated = () => {
   return widgetModel.find({ activated: true });
 };
 
-widgetModel.addWidget = (newWidget) => {
+widgetModel.addWidget = newWidget => {
   return newWidget.save();
 };
 
-widgetModel.updateWidget = (widget) => {
+widgetModel.updateWidget = widget => {
   return widgetModel.findByIdAndUpdate(widget.id, widget);
 };
 
-widgetModel.removeWidget = (widgetId) => {
+widgetModel.removeWidget = widgetId => {
   return widgetModel.remove({ _id: widgetId });
 };
 

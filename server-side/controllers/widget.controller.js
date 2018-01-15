@@ -30,7 +30,8 @@ controller.addWidget = async (req, res) => {
     name: req.body.name,
     type: req.body.type,
     params: req.body.params,
-    activated: true,
+    url: req.body.url,
+    activated: true
   });
   try {
     const savedWidget = await Widget.addWidget(newWidget);
@@ -48,7 +49,8 @@ controller.updateWidget = async (req, res) => {
     name: req.body.name,
     type: req.body.type,
     params: req.body.params,
-    activated: req.body.activated,
+    url: req.body.url,
+    activated: req.body.activated
   });
   try {
     const savedWidget = await Widget.updateWidget(newWidget);
